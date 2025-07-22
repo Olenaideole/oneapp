@@ -1,7 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
-
-const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!)
+import { supabase } from "@/lib/server/supabase"
 
 interface QuizResponse {
   email: string
@@ -231,13 +229,12 @@ function generateEmailHTML(report: AIReport, email: string): string {
   `
 }
 
+import { resend } from "@/lib/server/resend"
+
 async function sendEmailWithFallback(email: string, report: AIReport): Promise<{ success: boolean; error?: string }> {
   // Try Resend first if API key is available
   if (process.env.RESEND_API_KEY) {
     try {
-      const { Resend } = await import("resend")
-      const resend = new Resend(process.env.RESEND_API_KEY)
-
       const emailHTML = generateEmailHTML(report, email)
 
       const { data, error } = await resend.emails.send({
