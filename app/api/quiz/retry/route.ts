@@ -3,6 +3,7 @@ import { supabase } from "@/lib/server/supabase"
 import { resend } from "@/lib/server/resend"
 import { generateText } from "ai"
 import { xai } from "@ai-sdk/xai"
+import "@/lib/server/config"
 
 export async function POST(request: NextRequest) {
   try {
