@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
-import { CheckoutButton } from "@/components/checkout-button"
+import { redirectToCheckout } from "@/components/checkout-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -486,8 +486,14 @@ export default function QuizPage() {
               </div>
             </div>
 
-            {/* TODO: Replace with a real price ID from your Stripe dashboard */}
-            <CheckoutButton priceId="price_12345" />
+            <Button
+              size="lg"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-xl font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-4"
+              onClick={() => redirectToCheckout("price_12345")}
+            >
+              <Zap className="mr-2 h-6 w-6" />
+              Get Complete Guide - $32
+            </Button>
 
             <div className="grid grid-cols-2 gap-4 text-sm text-gray-600 mb-4">
               <div className="flex items-center justify-center">
