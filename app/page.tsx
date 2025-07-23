@@ -1,7 +1,6 @@
 "use client"
 
-import { useStripe } from "@/components/stripe-provider"
-import { redirectToCheckout } from "@/components/checkout-button"
+import { handleCheckout } from "@/lib/stripe-helpers"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -22,7 +21,6 @@ import {
 import Link from "next/link"
 
 export default function LandingPage() {
-  const stripe = useStripe()
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
@@ -71,7 +69,7 @@ export default function LandingPage() {
         <Button
           size="lg"
           className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-          onClick={() => redirectToCheckout(stripe, "price_12345")}
+          onClick={() => handleCheckout("price_12345")}
         >
           Get Instant Access — $43
           <ArrowRight className="ml-2 h-5 w-5" />
@@ -340,7 +338,7 @@ export default function LandingPage() {
               <Button
                 size="lg"
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-xl font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                onClick={() => redirectToCheckout(stripe, "price_12345")}
+                onClick={() => handleCheckout("price_12345")}
               >
                 <Zap className="mr-2 h-6 w-6" />
                 Buy Now & Join the Club

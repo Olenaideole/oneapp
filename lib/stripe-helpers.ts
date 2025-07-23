@@ -1,8 +1,12 @@
 'use client';
 
-import { useStripe } from './stripe-provider';
+import { loadStripe } from '@stripe/stripe-js';
 
-export const redirectToCheckout = async (stripe: any, priceId: string) => {
+export const handleCheckout = async (priceId: string) => {
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string
+  );
+  const stripe = await stripePromise;
   const response = await fetch('/api/checkout', {
     method: 'POST',
     headers: {
