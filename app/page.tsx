@@ -66,14 +66,8 @@ export default function LandingPage() {
           single day using AI and no-code tools.
         </p>
 
-        <Button
-          size="lg"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-          onClick={() => scrollToSection("pricing")}
-        >
-          Get Instant Access — $43
-          <ArrowRight className="ml-2 h-5 w-5" />
-        </Button>
+        {/* TODO: Replace with a real price ID from your Stripe dashboard */}
+        <CheckoutButton priceId="price_12345" />
 
         <p className="text-sm text-gray-500 mt-4">⚡ Instant access • 💰 One-time payment • 🎯 Lifetime access</p>
       </section>
