@@ -1,8 +1,12 @@
-import { stripe } from '@/lib/stripe';
+import { Stripe } from '@/lib/stripe';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   const { priceId } = await req.json();
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: '2024-06-20',
+  });
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
