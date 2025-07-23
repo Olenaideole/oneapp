@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
+import { useStripe } from "@/components/stripe-provider"
 import { redirectToCheckout } from "@/components/checkout-button"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -253,6 +254,7 @@ const quizBlocks: Block[] = [
 ]
 
 export default function QuizPage() {
+  const stripe = useStripe()
   const [currentBlock, setCurrentBlock] = useState(0)
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState<Record<string, string>>({})
@@ -489,7 +491,7 @@ export default function QuizPage() {
             <Button
               size="lg"
               className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 text-xl font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-4"
-              onClick={() => redirectToCheckout("price_12345")}
+              onClick={() => redirectToCheckout(stripe, "price_12345")}
             >
               <Zap className="mr-2 h-6 w-6" />
               Get Complete Guide - $32

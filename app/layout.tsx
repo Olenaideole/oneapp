@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   generator: 'v0.dev',
 }
 
+import { StripeProvider } from '@/components/stripe-provider'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -14,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <StripeProvider>{children}</StripeProvider>
+      </body>
     </html>
   )
 }
